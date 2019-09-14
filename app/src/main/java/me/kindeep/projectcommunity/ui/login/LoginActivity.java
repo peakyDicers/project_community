@@ -35,6 +35,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import me.kindeep.projectcommunity.LoginManager;
 import me.kindeep.projectcommunity.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -75,6 +76,9 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            boolean isNew = task.getResult().getAdditionalUserInfo().isNewUser();
+                            if (isNew)
+                                LoginManager.getInstance().SignUp(user);
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.

@@ -6,17 +6,13 @@ package me.kindeep.projectcommunity;
  */
 public class Account {
 
-    String firstName;
-    String lastName;
-    String id;
+    public String displayName;
+    public String phoneNumber;
+    public String id;
 
-    public String getFirstName() {
-        return firstName;
-    }
+    public String getFirstName() { return displayName; }
 
-    public String getLastName() {
-        return lastName;
-    }
+    public String getLastName() { return ""; }
 
     public String getId() {
         return id;
@@ -30,12 +26,9 @@ public class Account {
 
     // need some way to store profile image.
 
-    public Account(String firstName, String lastName, String id, String address){
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Account(String displayName, String id, String address){
+        this.displayName = displayName;
         this.id = id;
         this.address = address;
     }
-
-
 }
