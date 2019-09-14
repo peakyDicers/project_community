@@ -1,4 +1,4 @@
-package me.kindeep.projectcommunituy;
+package me.kindeep.projectcommunity;
 
 import org.junit.Test;
 

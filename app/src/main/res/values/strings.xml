@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Project Communituy</string>
+    <string name="title_activity_account">AccountActivity</string>
 </resources>
