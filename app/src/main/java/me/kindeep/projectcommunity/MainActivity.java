@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openPostings(View view) {
-        Intent intent = new Intent(MainActivity.this, PostingActivity.class);
+        Intent intent = new Intent(MainActivity.this, PostingsActivity.class);
         startActivity(intent);
     }
 }
