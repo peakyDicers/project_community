@@ -1,47 +1,54 @@
 package me.kindeep.projectcommunity;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.flexbox.FlexboxLayout;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.flexbox.FlexboxLayout;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PostingsActivity extends AppCompatActivity {
-
-    MapView mapView;
+    private static int MAP_REQUEST_CODE = 100;
 
     RecyclerView recyclerView;
+    MapView mapView;
 
+    //below
+    private FusedLocationProviderClient fusedLocationClient;
+    private Location currentLocation;
     List<Posting> postings;
+
 
     ArrayList<Catagory> filter_categories;
 
     CustomTagLayout tag_container;
+
 
     void updatePostings() {
         recyclerView.getAdapter().notifyDataSetChanged();
@@ -70,6 +77,8 @@ public class PostingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //below
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_postings);
 
@@ -86,10 +95,18 @@ public class PostingsActivity extends AppCompatActivity {
         tag_container = new ExtendedCustomTagLayout((FlexboxLayout) findViewById(R.id.category_filter), filter_categories, R.layout.tag_closeable);
 
         recyclerView = findViewById(R.id.recyclerView);
+        mapView = findViewById(R.id.mapView);
+        checkAndRequstMapPermissions();
 
         postings = API.getInstance().postings;
+        setLocations();
 
         Log.e("size", postings.size() + "");
+
+
+        // Gets the MapView from the XML layout and creates it
+        mapView.onCreate(savedInstanceState);
+        setupMapView();
 
 
         recyclerView.setAdapter(new RecyclerView.Adapter() {
@@ -130,38 +147,90 @@ public class PostingsActivity extends AppCompatActivity {
                 return postings.size();
             }
         });
-
         recyclerView.setLayoutManager(new LinearLayoutManager(PostingsActivity.this));
+    }
 
-        // Gets the MapView from the XML layout and creates it
-        mapView = findViewById(R.id.mapView);
-        mapView.onCreate(savedInstanceState);
+    private void checkAndRequstMapPermissions() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                    MAP_REQUEST_CODE);
+        }
+    }
+
+    private void setLocations() {
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        if (location != null) {
+                            currentLocation = location;
 
 
+                            Globals g = (Globals) getApplication();
+
+                            if (g != null && g.getMainUser() != null) {
+                                g.getMainUser().setCoords(location.getLatitude(), location.getLongitude());
+                            }
+
+                            setupMapView();
+                        }
+                    }
+                })
+
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        //TODO: Delete testing code
+                        if (e != null) {
+                            mapView = null;
+                        }
+                    }
+                });
+    }
+
+    private void setupMapView() {
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
-
-
                 GoogleMap mMap = googleMap;
+
+                if (currentLocation != null){
+                    LatLng atlng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()); //1E6
+                    float zoomLevel = 16.0f;
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(atlng, zoomLevel));
+                    mapView.onResume();
+                }
 
 
                 for (Posting p : API.getInstance().getAllPosts()) {
                     Globals g = (Globals) getApplication();
-                    if (p.getUser() == g.getMainUser()) {
-                        LatLng latlng = new LatLng(p.getUser().x, p.getUser().y);
-                        mMap.moveCamera(CameraUpdateFactory.newLatLng(latlng));
-                    } else {
-
+                    if (p.getUser() != g.getMainUser()) {
                         LatLng neighbor = new LatLng(p.getUser().x, p.getUser().y);
-                        mMap.addMarker(new MarkerOptions().position(neighbor).title(p.getFirstName()));
-                    }
-                }
+                        mMap.addMarker(new MarkerOptions().position(neighbor).title(p.getFirstName()) .snippet(p.toString()));
+                        //TODO: TOSTRING AND TRAVEL DISTANCE
 
-                mapView.onResume();
+                    }
+
+                }
             }
         });
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        if (requestCode == MAP_REQUEST_CODE) {
+            // If request is cancelled, the result arrays are empty.
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                setLocations();
+            } else {
+                // permission denied, do nothing
+            }
+        }
     }
 
     private class PostingHolder extends RecyclerView.ViewHolder {
@@ -177,5 +246,9 @@ public class PostingsActivity extends AppCompatActivity {
         }
     }
 }
+
+
+
+
 
 
