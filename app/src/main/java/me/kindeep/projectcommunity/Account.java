@@ -1,5 +1,7 @@
 package me.kindeep.projectcommunity;
 
+import java.util.List;
+
 /**
  * Author: admin
  * Date: 2019-09-14
@@ -11,6 +13,8 @@ public class Account {
     public String id;
     public double x;
     public double y;
+    public List<Catagory> skill;
+    public List<Catagory> interests;
 
     public String getFirstName() { return displayName; }
 

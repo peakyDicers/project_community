@@ -12,34 +12,13 @@
 
 
         <com.google.android.flexbox.FlexboxLayout
-            android:id="@+id/skills"
+            android:id="@+id/category_filter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8sp"
             app:alignContent="flex_start"
             app:alignItems="flex_start"
             app:flexWrap="wrap">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8sp"
-                android:background="@color/colorPrimary"
-                android:text="wut" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8sp"
-                android:background="@color/colorPrimary"
-                android:text="wut" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8sp"
-                android:background="@color/colorPrimary"
-                android:text="wut" />
 
         </com.google.android.flexbox.FlexboxLayout>
 
