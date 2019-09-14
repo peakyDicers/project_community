@@ -15,7 +15,7 @@ public class AccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
 
-        account = new Account("John", "doe", "adf32egdsa", "343 Why Street, No town, Nowhere");
+        account = new Account("John", "doe", "adf32egdsa");
 
         if (account == null) {
             Toast.makeText(AccountActivity.this, "Did no worko", Toast.LENGTH_SHORT).show();
