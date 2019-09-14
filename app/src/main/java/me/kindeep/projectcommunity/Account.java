@@ -13,7 +13,7 @@ public class Account {
     public String id;
     public double x;
     public double y;
-    public List<Catagory> skill;
+    public List<Catagory> skills;
     public List<Catagory> interests;
 
     public String getFirstName() { return displayName; }
@@ -32,7 +32,7 @@ public class Account {
 
     // need some way to store profile image.
 
-    public Account(String displayName, String id, String address){
+    public Account(String dispslayName, String id, String address){
         this.displayName = displayName;
         this.id = id;
         this.address = address;
@@ -40,5 +40,13 @@ public class Account {
     public void setCoords(double la, double lo){
         x = lo;
         y = la;
+    }
+
+    public List<Catagory> getSkills() {
+        return skills;
+    }
+
+    public List<Catagory> getInterests() {
+        return interests;
     }
 }

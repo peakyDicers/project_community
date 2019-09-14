@@ -33,16 +33,17 @@ public class CustomTagLayout {
 
     void update() {
         parentFlexBox.removeAllViewsInLayout();
-        for (Catagory cat : categories) {
-            View v = LayoutInflater.from(parentFlexBox.getContext()).inflate(inflate_from, parentFlexBox, false);
+        if(categories != null) {
+            for (Catagory cat : categories) {
+                View v = LayoutInflater.from(parentFlexBox.getContext()).inflate(inflate_from, parentFlexBox, false);
 
-            TextView tv = ((TextView) v.findViewById(R.id.tag_name));
+                TextView tv = ((TextView) v.findViewById(R.id.tag_name));
 
-            tv.setText(cat.getName());
-            v.setBackgroundColor(Color.parseColor(cat.getHexString()));
-            parentFlexBox.addView(v);
+                tv.setText(cat.getName());
+                v.setBackgroundColor(Color.parseColor(cat.getHexString()));
+                parentFlexBox.addView(v);
+            }
         }
-        Log.d("WHAT SIZE", categories.size() + "");
     }
 
 

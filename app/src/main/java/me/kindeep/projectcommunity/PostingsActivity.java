@@ -161,6 +161,7 @@ public class PostingsActivity extends AppCompatActivity {
                 mapView.onResume();
             }
         });
+
     }
 
     private class PostingHolder extends RecyclerView.ViewHolder {

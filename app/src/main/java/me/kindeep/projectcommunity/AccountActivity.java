@@ -6,9 +6,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.flexbox.FlexboxLayout;
+
 public class AccountActivity extends AppCompatActivity {
 
-
+    FlexboxLayout skillsFlex;
+    FlexboxLayout interestsFlex;
     Account account;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +23,11 @@ public class AccountActivity extends AppCompatActivity {
         Globals g = (Globals)getApplication();
         g.setMainUser(account);
 
+        skillsFlex = findViewById(R.id.skills);
+        interestsFlex = findViewById(R.id.interests);
 
+        new CustomTagLayout(skillsFlex, account.getSkills());
+        new CustomTagLayout(interestsFlex, account.getInterests());
 
         if (account == null) {
             Toast.makeText(AccountActivity.this, "Did no worko", Toast.LENGTH_SHORT).show();
