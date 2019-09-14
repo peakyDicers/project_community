@@ -1,6 +1,8 @@
 package me.kindeep.projectcommunity;
 
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -48,7 +50,7 @@ public class API {
         return instance;
     }
 
-    public void createPost(Posting p){
+    public void createPost(Posting p, final View v){
         Map<String, Object> post = new HashMap<>();
         post.put("creator_id", LoginManager.getInstance().getCurrentUser().id);
         post.put("date_created", new Timestamp(p.dPosted));
@@ -64,12 +66,14 @@ public class API {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                        Toast.makeText(v.getContext(), "Successfully Posted (:", Toast.LENGTH_SHORT);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.w(TAG, "Error adding document", e);
+                        Toast.makeText(v.getContext(), "Could not post. ):", Toast.LENGTH_SHORT);
                     }
                 });
     }

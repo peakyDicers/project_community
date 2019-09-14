@@ -1,6 +1,5 @@
 package me.kindeep.projectcommunity;
 
-import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button button = findViewById(R.id.button);
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -25,9 +23,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button openCreatePostBtn = findViewById(R.id.openCreatePostBtn);
+        openCreatePostBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, PostingActivity.class);
+                startActivity(i);
+            }
+        });
 
-        API.getInstance();
-
+        API.getInstance(); //don't remove this. required to start listening for database changes.
     }
 
     public void openAccount(View view) {
