@@ -9,6 +9,8 @@ public class Account {
     public String displayName;
     public String phoneNumber;
     public String id;
+    public double x;
+    public double y;
 
     public String getFirstName() { return displayName; }
 
@@ -30,5 +32,9 @@ public class Account {
         this.displayName = displayName;
         this.id = id;
         this.address = address;
+    }
+    public void setCoords(double la, double lo){
+        x = lo;
+        y = la;
     }
 }

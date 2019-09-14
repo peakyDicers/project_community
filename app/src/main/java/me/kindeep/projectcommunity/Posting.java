@@ -12,6 +12,7 @@ public class Posting{
     public boolean resolved;
     public Account accountPosted;
 
+
     public Posting(Catagory [] c, String messageC, Date dPostedC, Date dDueC, Account accountPostedC){
         catagories = c;
         message = messageC;
@@ -23,6 +24,8 @@ public class Posting{
     public void setResolved() {
         resolved = true;
     }
+    public Account getUser(){return accountPosted; }
+    public String getFirstName() {return accountPosted.getFirstName();}
 
 
 
