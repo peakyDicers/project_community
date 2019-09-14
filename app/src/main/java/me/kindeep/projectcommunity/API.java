@@ -76,31 +76,8 @@ public class API {
     }
 
     public List<Posting> getAllPosts(){
-        postings = new ArrayList<Posting>();
-        db.collection("posts")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                                Map<String, Object> data = document.getData();
-                                Posting p = new Posting(null,
-                                        (String)data.get("description"),
-                                        ((Timestamp)data.get("date_created")).toDate(),
-                                        ((Timestamp)data.get("date_due")).toDate(),
-                                        getUser((String)data.get("creator_id"))
-                                        );
-                                postings.add(p);
-                            }
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
 
-        return null;
+        return postings;
 
     }
 
