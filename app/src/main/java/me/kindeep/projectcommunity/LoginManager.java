@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -29,16 +30,23 @@ public class LoginManager {
      * @return account id (from firebase).
      */
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseAuth firebaseAuth;
     private static LoginManager instance;
 
     private LoginManager(){
         instance = new LoginManager();
+        firebaseAuth = FirebaseAuth.getInstance();
     }
 
     public static LoginManager getInstance(){
         if (instance == null)
             instance = new LoginManager();
         return instance;
+    }
+
+    public Account getCurrentUser(){
+        Account a = API.getInstance().getUser(firebaseAuth.getCurrentUser().getUid());
+        return a;
     }
 
     public void SignUp(FirebaseUser user){

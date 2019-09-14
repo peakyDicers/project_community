@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -13,7 +14,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -53,8 +53,8 @@ public class API {
 
                                 Posting p = new Posting(null,
                                         (String)data.get("discription"),
-                                        (Date)data.get("date_created"),
-                                        (Date)data.get("date_due"),
+                                        ((Timestamp)data.get("date_created")).toDate(),
+                                        ((Timestamp)data.get("date_due")).toDate(),
                                         getUser((String)data.get("creator_id"))
                                         );
 
@@ -67,6 +67,15 @@ public class API {
                 });
 
         return result;
+
+    }
+
+    public void deletePost(String postId){
+        DocumentReference docRef = db.collection("posts").document(postId);
+
+// Remove the 'capital' field from the document
+        //Map<String,Object> updates = new HashMap<>();
+        //updates.put("capital", FieldValue.delete());
 
     }
 
