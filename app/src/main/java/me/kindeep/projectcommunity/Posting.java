@@ -11,6 +11,7 @@ public class Posting{
     public Date dDue;
     public boolean resolved;
     public Account accountPosted;
+    public String title = "Whoooooooo";
 
 
     public Posting(Catagory [] c, String messageC, Date dPostedC, Date dDueC, Account accountPostedC){

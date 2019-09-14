@@ -3,17 +3,20 @@ package me.kindeep.projectcommunity;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +29,7 @@ public class API {
     private FirebaseFirestore db;
     private String TAG = "API: ";
 
-    List<Posting> result = new ArrayList<Posting>();
+    List<Posting> postings = new ArrayList<Posting>();
     Account account = null;
 
     private API(){
@@ -34,14 +37,47 @@ public class API {
     }
 
     public static API getInstance(){
-        if (instance == null)
+        if (instance == null){
             instance = new API();
+            instance.listenForPosts();
+        }
+
         return instance;
     }
 
+    private void listenForPosts(){
+        db.collection("posts")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value,
+                                        @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            Log.w(TAG, "Listen failed.", e);
+                            return;
+                        }
+                        postings.clear();
+                        List<String> cities = new ArrayList<>();
+                        for (QueryDocumentSnapshot doc : value) {
+                            Log.e("wow", doc.toString());
+                            Map<String, Object> data = doc.getData();
+
+
+                            Posting p = new Posting(null,
+                                    (String)data.get("description"),
+                                    ((Timestamp)data.get("date_created")).toDate(),
+                                    ((Timestamp)data.get("date_due")).toDate(),
+                                    new Account("ian", "222", "123 street")
+                            );
+                            postings.add(p);
+                        }
+                        Log.d(TAG, "Current cites in CA: " + cities);
+                    }
+                });
+    }
+
     public List<Posting> getAllPosts(){
-        result.clear();
-        db.collection("cities")
+        postings = new ArrayList<Posting>();
+        db.collection("posts")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -50,15 +86,13 @@ public class API {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d(TAG, document.getId() + " => " + document.getData());
                                 Map<String, Object> data = document.getData();
-
                                 Posting p = new Posting(null,
-                                        (String)data.get("discription"),
-                                        (Date)data.get("date_created"),
-                                        (Date)data.get("date_due"),
+                                        (String)data.get("description"),
+                                        ((Timestamp)data.get("date_created")).toDate(),
+                                        ((Timestamp)data.get("date_due")).toDate(),
                                         getUser((String)data.get("creator_id"))
                                         );
-
-                                result.add(p);
+                                postings.add(p);
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
@@ -66,7 +100,16 @@ public class API {
                     }
                 });
 
-        return result;
+        return null;
+
+    }
+
+    public void deletePost(String postId){
+        DocumentReference docRef = db.collection("posts").document(postId);
+
+// Remove the 'capital' field from the document
+        //Map<String,Object> updates = new HashMap<>();
+        //updates.put("capital", FieldValue.delete());
 
     }
 
@@ -76,21 +119,23 @@ public class API {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
+
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                         Map<String, Object> data = document.getData();
+
                         account = new Account(
                                 (String)data.get("displayName"),
                                 (String)document.getId(),
                                 (String)data.get("address")
                         );
                     } else {
-                        account = null;
+                        account = new Account(null, null, null);
                         Log.d(TAG, "No such document");
                     }
                 } else {
-                    account = null;
+                    account = new Account( null, null, null);
                     Log.d(TAG, "get failed with ", task.getException());
                 }
             }
