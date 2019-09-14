@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -7,16 +8,63 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="64sp"
-        android:orientation="horizontal"></LinearLayout>
+        android:orientation="horizontal">
+
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/skills"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8sp"
+            app:alignContent="flex_start"
+            app:alignItems="flex_start"
+            app:flexWrap="wrap">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8sp"
+                android:background="@color/colorPrimary"
+                android:text="wut" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8sp"
+                android:background="@color/colorPrimary"
+                android:text="wut" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8sp"
+                android:background="@color/colorPrimary"
+                android:text="wut" />
+
+        </com.google.android.flexbox.FlexboxLayout>
+
+
+    </LinearLayout>
+
+    <com.google.android.gms.maps.MapView
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/mapView">
+
+    </com.google.android.gms.maps.MapView>
+
 
     <LinearLayout
+        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/recyclerView">
+            android:layout_height="match_parent">
 
         </androidx.recyclerview.widget.RecyclerView>
 
