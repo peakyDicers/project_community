@@ -32,6 +32,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button signOutBtn = findViewById(R.id.signOutBtn);
+        signOutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoginManager.getInstance().signOut();
+            }
+        });
+
         API.getInstance(); //don't remove this. required to start listening for database changes.
     }
 

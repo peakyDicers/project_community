@@ -40,7 +40,15 @@ public class LoginManager {
     public static LoginManager getInstance(){
         if (instance == null){
             instance = new LoginManager();
-            instance.firebaseAuth = FirebaseAuth.getInstance();
+            final FirebaseAuth auth = instance.firebaseAuth;
+            auth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+                @Override
+                public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                    if (auth.getCurrentUser() == null){
+                        Log.e("AUTH: ", "signed out");
+                    }
+                }
+            });
         }
         return instance;
     }
@@ -49,6 +57,10 @@ public class LoginManager {
         if (firebaseAuth.getCurrentUser() == null) return null;
         Account a = API.getInstance().getUser(firebaseAuth.getCurrentUser().getUid());
         return a;
+    }
+
+    public void signOut(){
+        firebaseAuth.signOut();
     }
 
     public void SignUp(FirebaseUser user){

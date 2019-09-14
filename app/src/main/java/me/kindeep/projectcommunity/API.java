@@ -46,7 +46,6 @@ public class API {
             instance = new API();
             instance.listenForPosts();
         }
-
         return instance;
     }
 
