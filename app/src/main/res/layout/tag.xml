@@ -2,6 +2,9 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:id="@+id/tag_name"
-    android:text="Wuttt">
+    android:text="Wuttt"
+    android:background="#ff0000"
+    android:padding="2sp"
+    >
 
 </TextView>

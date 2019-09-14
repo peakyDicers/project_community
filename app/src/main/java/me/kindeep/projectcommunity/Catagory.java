@@ -9,4 +9,8 @@ public class Catagory {
         hexCode = h;
     }
 
+    public String getName() {
+        return name;
+    }
+
 }
