@@ -22,11 +22,14 @@ public class Posting{
         resolved = false;
         accountPosted = accountPostedC;
     }
+
     public void setResolved() {
         resolved = true;
     }
+
     public Account getUser(){return accountPosted; }
     public String getFirstName() {return accountPosted.getFirstName();}
+
     @Override
     public String toString(){
         return message;
