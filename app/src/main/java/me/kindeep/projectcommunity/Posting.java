@@ -27,6 +27,12 @@ public class Posting{
     }
     public Account getUser(){return accountPosted; }
     public String getFirstName() {return accountPosted.getFirstName();}
+    @Override
+    public String toString(){
+        return message;
+    }
+
+
 
 
 

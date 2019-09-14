@@ -17,4 +17,6 @@ public class Catagory {
         return hexCode;
     }
 
+
+
 }
