@@ -76,6 +76,18 @@ public class PostingsActivity extends AppCompatActivity {
                 LatLng sydney = new LatLng(-34, 151);
                 mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+                /*
+                for(Account a : userDatabase){
+                    if(a = our guy){
+                    LatLng ourguy = new LatLng(a.x, a.y);
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng());
+                    }
+                    else{
+                    LatLng neighbor = new Latlng (a.x,a.y);
+                    mMap.addMarker(new MarkerOptions().position(neighbor).title(a.getFirstName()));
+                    }
+                }
+             */
                 mapView.onResume();
             }
         });
