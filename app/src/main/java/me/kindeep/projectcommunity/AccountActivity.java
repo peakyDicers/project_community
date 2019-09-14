@@ -1,32 +1,31 @@
 package me.kindeep.projectcommunity;
 
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.view.View;
 
 public class AccountActivity extends AppCompatActivity {
+
+    Account account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        account = new Account("John", "doe", "adf32egdsa", "343 Why Street, No town, Nowhere");
+
+        if (account == null) {
+            Toast.makeText(AccountActivity.this, "Did no worko", Toast.LENGTH_SHORT).show();
+        }
+
+        ((TextView) findViewById(R.id.name)).setText(account.getFirstName() + " " + account.getLastName());
+
+        ((TextView) findViewById(R.id.address)).setText(account.getAddress());
+
+
     }
 
 }

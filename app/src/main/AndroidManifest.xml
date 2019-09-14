@@ -9,21 +9,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".PostingActivity"></activity>
+        <activity android:name=".PostingsActivity" />
+        <activity android:name=".EditableAccountActivity" />
         <activity
-            android:name=".ui.login.LoginActivity"
-            android:label="@string/title_activity_login">
+            android:name="me.kindeep.projectcommunity.AccountActivity"
+            android:label="@string/title_activity_account">
+
+        </activity>
+        <activity android:name="me.kindeep.projectcommunity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".AccountActivity"
-            android:label="@string/title_activity_account"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MainActivity">
-
         </activity>
     </application>
 
