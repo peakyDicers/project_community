@@ -62,6 +62,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void updateUI(FirebaseUser currentUser) {
+
+    }
+
+    private void loadMainApp(){
         Intent myIntent = new Intent(this, MainActivity.class);
         startActivity(myIntent);
     }
@@ -81,6 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                             boolean isNew = task.getResult().getAdditionalUserInfo().isNewUser();
                             if (isNew)
                                 LoginManager.getInstance().SignUp(user);
+                            loadMainApp();
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
