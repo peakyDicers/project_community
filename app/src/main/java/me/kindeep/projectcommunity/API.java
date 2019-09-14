@@ -45,6 +45,17 @@ public class API {
         return instance;
     }
 
+    private List<Catagory> getCategories(){
+        List<Catagory> result = new ArrayList<>();
+        result.add(new Catagory("Home", "#f1c40f"));
+        result.add(new Catagory("Vehicle", "#28b463"));
+        result.add(new Catagory("Plumbing", "#138d75"));
+        result.add(new Catagory("Cooking", "#2e86c1"));
+        result.add(new Catagory("Lawn Care", "#7d3c98"));
+        result.add(new Catagory("Child Care", "#cb4335"));
+        return result;
+    }
+
     private void listenForPosts(){
         db.collection("posts")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
