@@ -13,7 +13,9 @@
         android:layout_margin="8sp">
 
         <ImageView
-            android:id="@+id/profile_image"
+
+            android:id="@+id/profile_picture"
+
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:src="@drawable/cat"
@@ -34,7 +36,7 @@
                 android:layout_marginBottom="4sp"
                 android:text="name"
                 android:textSize="32sp"
-                app:layout_constraintLeft_toRightOf="@id/profile_image"
+                app:layout_constraintLeft_toRightOf="@id/profile_picture"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -46,10 +48,16 @@
                 android:layout_marginTop="4sp"
                 android:text="address"
                 android:textSize="24sp"
-                app:layout_constraintLeft_toRightOf="@id/profile_image"
+                app:layout_constraintLeft_toRightOf="@id/profile_picture"
                 app:layout_constraintTop_toBottomOf="@id/name"
 
                 />
+
+            <Button
+                android:id="@+id/buttonPic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Choose profile picture" />
         </LinearLayout>
 
 

@@ -215,7 +215,7 @@ public class PostingsActivity extends AppCompatActivity {
                     if (p.getUser() != g.getMainUser()) {
                         LatLng neighbor = new LatLng(p.getUser().x, p.getUser().y);
                         mMap.addMarker(new MarkerOptions().position(neighbor).title(p.getFirstName()) .snippet(p.toString()));
-                        //TODO: TOSTRING AND TRAVEL DISTANCE
+                        //TODO:TRAVEL DISTANCE
 
                     }
 
