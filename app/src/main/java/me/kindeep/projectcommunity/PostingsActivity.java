@@ -1,6 +1,7 @@
 package me.kindeep.projectcommunity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -73,7 +74,9 @@ public class PostingsActivity extends AppCompatActivity {
 
     public void addFilterCategory(View v) {
 
+        Intent i = new Intent(PostingsActivity.this,CategorySelectActivity.class);
 
+        startActivity(i);
 
         Toast.makeText(PostingsActivity.this, "Add a category", Toast.LENGTH_SHORT).show();
     }
@@ -207,7 +210,7 @@ public class PostingsActivity extends AppCompatActivity {
                 }
 
 
-                for (Posting p : API.getInstance().getAllPosts()) {
+                for (Posting p : API.getInstance().getAllPosts() != null? API.getInstance().getAllPosts() : new ArrayList<Posting>()) {
                     Globals g = (Globals) getApplication();
                     if (p.getUser() != g.getMainUser()) {
                         LatLng neighbor = new LatLng(p.getUser().x, p.getUser().y);

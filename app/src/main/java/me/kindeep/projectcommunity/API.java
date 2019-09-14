@@ -74,7 +74,7 @@ public class API {
                 });
     }
 
-    private List<Catagory> getCategories(){
+     List<Catagory> getCategories(){
         List<Catagory> result = new ArrayList<>();
         result.add(new Catagory("Home", "#f1c40f"));
         result.add(new Catagory("Vehicle", "#28b463"));

@@ -11,9 +11,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
+import java.util.Arrays;
+
 public class CategorySelectActivity extends AppCompatActivity {
 
-    String[] country = { "India", "USA", "China", "Japan", "Other"};
+//    String[] country = {};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +23,8 @@ public class CategorySelectActivity extends AppCompatActivity {
         setContentView(R.layout.activity_category_select);
 
         Spinner spinner = findViewById(R.id.spinner);
+
+//        String[] stringArray = Arrays.copyOf(API.getInstance().getCategories().toArray(), API.getInstance().getCategories().size(), String[].class);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -35,7 +39,9 @@ public class CategorySelectActivity extends AppCompatActivity {
         });
 
         //Creating the ArrayAdapter instance having the country list
-        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,country);
+        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,
+                Arrays.copyOf(API.getInstance().getCategories().toArray(), API.getInstance().getCategories().size(), String[].class)
+        );
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
         spinner.setAdapter(aa);

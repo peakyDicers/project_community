@@ -22,7 +22,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".CategorySelectActivity"></activity>
-        android:theme="@style/AppTheme">
         <activity android:name=".makePost"></activity>
         <activity android:name=".PostingActivity" />
         <activity android:name=".PostingsActivity" />
