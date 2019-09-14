@@ -31,7 +31,7 @@ public class CustomTagLayout {
             TextView tv = ((TextView) v.findViewById(R.id.tag_name));
 
             tv.setText(cat.getName());
-//            tv.setBackgroundColor(new Color(cat.hexCode));
+            tv.setBackgroundColor(Color.parseColor(cat.getHexString()));
 
         }
 

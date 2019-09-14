@@ -29,27 +29,6 @@
         app:alignItems="flex_start"
         app:flexWrap="wrap">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="4sp"
-            android:background="@color/colorPrimary"
-            android:text="wut" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="4sp"
-            android:background="@color/colorPrimary"
-            android:text="wut" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="4sp"
-            android:background="@color/colorPrimary"
-            android:text="wut" />
-
     </com.google.android.flexbox.FlexboxLayout>
 
     <TextView
