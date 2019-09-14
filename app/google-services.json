@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "591210991348",
+    "firebase_url": "https://project-community-abc79.firebaseio.com",
+    "project_id": "project-community-abc79",
+    "storage_bucket": "project-community-abc79.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:591210991348:android:ffee2443e0454031b358a1",
+        "android_client_info": {
+          "package_name": "me.kindeep.projectcommunituy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "591210991348-fj2gvb47huq9pml7on9hsde9ktcjpjlb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "me.kindeep.projectcommunituy",
+            "certificate_hash": "e126862e5f9c0a2b59c85570154f42594c229a69"
+          }
+        },
+        {
+          "client_id": "591210991348-sk2r5tgmdh9kcjlde879ud7pl6drl9t4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "me.kindeep.projectcommunituy",
+            "certificate_hash": "169a932ec689971c5f4a4755e0765f40450bff65"
+          }
+        },
+        {
+          "client_id": "591210991348-4nbsttgd3pm4s9sr5cveongei665c64o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDI40cCbxM22vDzXg7Vu8kLlLMdUdUqPww"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "591210991348-4nbsttgd3pm4s9sr5cveongei665c64o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
