@@ -46,13 +46,38 @@ public class PostingsActivity extends AppCompatActivity {
     List<Posting> postings;
 
 
-    ArrayList<Catagory> filter_categories;
+    List<Catagory> filter_categories;
 
     CustomTagLayout tag_container;
 
 
     void updatePostings() {
         recyclerView.getAdapter().notifyDataSetChanged();
+    }
+
+    void saveFilterSettings() {
+        Toast.makeText(this, "Filter saved", Toast.LENGTH_SHORT).show();
+        Globals g = (Globals) getApplication();
+        Log.e("dpo", "was' " + g.getLastUsedFilter().size() );
+        if(g.getLastUsedFilter().size() > this.filter_categories.size()) {
+            // not a good fix.
+            return;
+        }
+        if( this.filter_categories != null) {
+            g.setLastUsedFilter(this.filter_categories);
+        }
+
+        Log.e("dpo",  " is now " + g.getLastUsedFilter().size());
+    }
+
+    void recoverFilterSettings() {
+        Globals g = (Globals) getApplication();
+        if (g.getLastUsedFilter() != null) {
+            this.filter_categories = g.getLastUsedFilter();
+        }
+        else {
+            filter_categories = new ArrayList<>();
+        }
     }
 
     public void removeTagFromFilter(View v) {
@@ -81,22 +106,28 @@ public class PostingsActivity extends AppCompatActivity {
         Toast.makeText(PostingsActivity.this, "Add a category", Toast.LENGTH_SHORT).show();
     }
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //below
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_postings);
+        recoverFilterSettings();
 
+//        int value = savedInstanceState.getInt("selected_category_index");
+//        if (value != -1) {
+//
+//        }
         findViewById(R.id.category_filter);
 
-        filter_categories = new ArrayList<>();
-        filter_categories.add(new Catagory("Wut", "#ff00ff"));
-        filter_categories.add(new Catagory("Wut", "#ff00ff"));
-        filter_categories.add(new Catagory("Wut", "#ff00ff"));
-        filter_categories.add(new Catagory("Wut", "#ff00ff"));
-        filter_categories.add(new Catagory("Wut", "#ff00ff"));
-        filter_categories.add(new Catagory("Wut", "#ff00ff"));
+//        filter_categories.add(new Catagory("Wut", "#ff00ff"));
+//        filter_categories.add(new Catagory("Wut", "#ff00ff"));
+//        filter_categories.add(new Catagory("Wut", "#ff00ff"));
+//        filter_categories.add(new Catagory("Wut", "#ff00ff"));
+//        filter_categories.add(new Catagory("Wut", "#ff00ff"));
+//        filter_categories.add(new Catagory("Wut", "#ff00ff"));
 
         tag_container = new ExtendedCustomTagLayout((FlexboxLayout) findViewById(R.id.category_filter), filter_categories, R.layout.tag_closeable);
 
@@ -107,7 +138,7 @@ public class PostingsActivity extends AppCompatActivity {
         postings = API.getInstance().postings;
         setLocations();
 
-        Log.e("size", postings.size() + "");
+//        Log.e("size", postings.size() + "");
 
 
         // Gets the MapView from the XML layout and creates it
@@ -137,15 +168,15 @@ public class PostingsActivity extends AppCompatActivity {
 
                 hol.desc.setText(postings.get(position).message);
 
-                ArrayList<Catagory> list = new ArrayList<>();
-                list.add(new Catagory("Wut", "#ff00ff"));
-                list.add(new Catagory("Wut", "#ff00ff"));
-                list.add(new Catagory("Wut", "#ff00ff"));
-                list.add(new Catagory("Wut", "#ff00ff"));
-                list.add(new Catagory("Wut", "#ff00ff"));
-                list.add(new Catagory("Wut", "#ff00ff"));
+//                ArrayList<Catagory> list = new ArrayList<>();
+//                list.add(new Catagory("Wut", "#ff00ff"));
+//                list.add(new Catagory("Wut", "#ff00ff"));
+//                list.add(new Catagory("Wut", "#ff00ff"));
+//                list.add(new Catagory("Wut", "#ff00ff"));
+//                list.add(new Catagory("Wut", "#ff00ff"));
+//                list.add(new Catagory("Wut", "#ff00ff"));
 
-                new CustomTagLayout(hol.skills, list);
+                new CustomTagLayout(hol.skills, API.getInstance().getCategories());
             }
 
             @Override
@@ -250,6 +281,13 @@ public class PostingsActivity extends AppCompatActivity {
             this.desc = desc;
             this.skills = skills;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.e("Filter", "saved");
+        saveFilterSettings();
+        super.onDestroy();
     }
 }
 
