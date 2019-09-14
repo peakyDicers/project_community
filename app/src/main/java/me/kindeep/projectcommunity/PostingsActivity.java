@@ -65,6 +65,9 @@ public class PostingsActivity extends AppCompatActivity {
 
 
     public void addFilterCategory(View v) {
+
+
+
         Toast.makeText(PostingsActivity.this, "Add a category", Toast.LENGTH_SHORT).show();
     }
 
