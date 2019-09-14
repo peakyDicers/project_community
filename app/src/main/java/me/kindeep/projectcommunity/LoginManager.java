@@ -34,17 +34,19 @@ public class LoginManager {
     private static LoginManager instance;
 
     private LoginManager(){
-        instance = new LoginManager();
-        firebaseAuth = FirebaseAuth.getInstance();
+
     }
 
     public static LoginManager getInstance(){
-        if (instance == null)
+        if (instance == null){
             instance = new LoginManager();
+            instance.firebaseAuth = FirebaseAuth.getInstance();
+        }
         return instance;
     }
 
     public Account getCurrentUser(){
+        if (firebaseAuth.getCurrentUser() == null) return null;
         Account a = API.getInstance().getUser(firebaseAuth.getCurrentUser().getUid());
         return a;
     }

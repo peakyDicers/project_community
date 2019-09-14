@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
@@ -17,6 +19,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,6 +46,32 @@ public class API {
         }
 
         return instance;
+    }
+
+    public void createPost(Posting p){
+        Map<String, Object> post = new HashMap<>();
+        post.put("creator_id", LoginManager.getInstance().getCurrentUser().id);
+        post.put("date_created", new Timestamp(p.dPosted));
+        post.put("description", p.message);
+        post.put("latitude", 0);
+        post.put("longitude", 0);
+        post.put("address", "123 street.");
+
+
+        db.collection("posts")
+                .add(post)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
     }
 
     private List<Catagory> getCategories(){
@@ -87,8 +116,31 @@ public class API {
     }
 
     public List<Posting> getAllPosts(){
+        postings = new ArrayList<Posting>();
+        db.collection("posts")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                Map<String, Object> data = document.getData();
+                                Posting p = new Posting(null,
+                                        (String)data.get("description"),
+                                        ((Timestamp)data.get("date_created")).toDate(),
+                                        ((Timestamp)data.get("date_due")).toDate(),
+                                        getUser((String)data.get("creator_id"))
+                                );
+                                postings.add(p);
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
 
-        return postings;
+        return null;
 
     }
 
