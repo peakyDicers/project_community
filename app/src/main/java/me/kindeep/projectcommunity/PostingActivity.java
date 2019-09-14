@@ -35,7 +35,7 @@ public class PostingActivity extends AppCompatActivity {
                 //build the post.
                 Posting p = new Posting(null, description.getText().toString(), new Date(cal.getDate()), null, LoginManager.getInstance().getCurrentUser());
 
-                API.getInstance().createPost(p);
+                API.getInstance().createPost(p, v);
             }
         });
 
