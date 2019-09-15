@@ -16,13 +16,6 @@
 
     >
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Title"
-        android:textSize="24sp" />
-
     <com.google.android.flexbox.FlexboxLayout
         android:id="@+id/skills"
         android:layout_width="match_parent"
@@ -37,11 +30,12 @@
         android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Desc" />
+        android:text="Desc"
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/bytext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="By John Doe" />
+        android:text="John Doe" />
 </LinearLayout>

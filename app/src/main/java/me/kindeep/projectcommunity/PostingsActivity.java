@@ -148,7 +148,7 @@ public class PostingsActivity extends AppCompatActivity {
                     }
                 });
 
-                return new PostingHolder(v, (TextView) v.findViewById(R.id.title), (TextView) v.findViewById(R.id.description), (FlexboxLayout) v.findViewById(R.id.skills));
+                return new PostingHolder(v,  (TextView) v.findViewById(R.id.description), (FlexboxLayout) v.findViewById(R.id.skills), (TextView) v.findViewById(R.id.bytext));
 
             }
 
@@ -158,8 +158,7 @@ public class PostingsActivity extends AppCompatActivity {
             public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
                 PostingHolder hol = (PostingHolder) holder;
 
-                hol.title.setText(postings.get(position).title);
-
+                hol.creator.setText(postings.get(position).creatorName);
                 hol.desc.setText(postings.get(position).message);
 
                 new CustomTagLayout(hol.skills, API.getInstance().getCategories());
@@ -268,15 +267,15 @@ public class PostingsActivity extends AppCompatActivity {
     }
 
     private class PostingHolder extends RecyclerView.ViewHolder {
-        TextView title;
+        TextView creator;
         TextView desc;
         FlexboxLayout skills;
 
-        public PostingHolder(@NonNull View itemView, TextView title, TextView desc, FlexboxLayout skills) {
+        public PostingHolder(@NonNull View itemView, TextView desc, FlexboxLayout skills, TextView creator) {
             super(itemView);
-            this.title = title;
             this.desc = desc;
             this.skills = skills;
+            this.creator = creator;
         }
     }
 

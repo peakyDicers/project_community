@@ -102,7 +102,6 @@ public class API {
                         postings.clear();
                         List<String> cities = new ArrayList<>();
                         for (QueryDocumentSnapshot doc : value) {
-                            Log.e("wow", doc.toString());
                             Map<String, Object> data = doc.getData();
                             Posting p = new Posting(
                                     null,
