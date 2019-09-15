@@ -254,9 +254,20 @@ public class PostingsActivity extends AppCompatActivity {
                 for (Posting p : API.getInstance().getAllPosts() != null? API.getInstance().getAllPosts() : new ArrayList<Posting>()) {
                     Globals g = (Globals) getApplication();
                     if (p.getUser() != g.getMainUser()) {
+                      //  Location loc1 = new Location("");
+                       // loc1.setLatitude(loca);
+                        //loc1.setLongitude(lon1);
+
+                        Location loc2 = new Location("");
+                        loc2.setLatitude(p.getUser().x);
+                        loc2.setLongitude(p.getUser().y);
+
+
+                        float distanceInMeters = currentLocation.distanceTo(loc2);
                         LatLng neighbor = new LatLng(p.getUser().x, p.getUser().y);
-                        mMap.addMarker(new MarkerOptions().position(neighbor).title(p.getFirstName()) .snippet(p.toString()));
-                        //TODO:TRAVEL DISTANCE
+
+                        mMap.addMarker(new MarkerOptions().position(neighbor).icon(p.catagories[0].getMarkerColour()).title(p.getFirstName()) .snippet(""+distanceInMeters+"km away\n"+p.toString()));
+
 
                     }
 

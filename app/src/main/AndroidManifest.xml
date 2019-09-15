@@ -3,6 +3,9 @@
     package="me.kindeep.projectcommunity">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -31,7 +34,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
         <activity android:name=".PostActivity"></activity>
+
+        <activity android:name=".requestView"></activity>
+
         <!-- android:theme="@style/AppTheme"> -->
         <activity android:name=".CategorySelectActivity" />
         <activity android:name=".makePost" />
@@ -66,7 +73,11 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
+<<<<<<< Updated upstream
         <activity android:name=".MainActivity"></activity>
+=======
+        <activity android:name=".MainActivity" />
+>>>>>>> Stashed changes
     </application>
 
 </manifest>
