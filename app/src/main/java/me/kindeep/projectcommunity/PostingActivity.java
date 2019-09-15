@@ -66,17 +66,21 @@ public class PostingActivity extends AppCompatActivity {
                 );
                 p.setLocation(latitude, longitude);
                 API.getInstance().createPost(p, v);
-                Intent i = new Intent(PostingActivity.this, PostingsActivity.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(i);
+//                Intent i = new Intent(PostingActivity.this, PostingsActivity.class);
+//                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                startActivity(i);
+                popExitPage();
             }
         });
     }
 
     public void cancelPost(View v) {
+        popExitPage();
+    }
+
+    public void popExitPage() {
         Intent i = new Intent(PostingActivity.this, PostingsActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
     }
-
 }

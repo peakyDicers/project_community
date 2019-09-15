@@ -6,27 +6,50 @@
     android:layout_height="match_parent"
     tools:context="me.kindeep.projectcommunity.requestView">
 
-    <Button
+    <ImageView
         android:id="@+id/button3"
-        android:layout_width="207dp"
-        android:layout_height="90dp"
-        android:layout_marginStart="102dp"
-        android:layout_marginEnd="102dp"
+        android:layout_width="64sp"
+        android:layout_height="64sp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="dial"
+        android:src="@drawable/ic_local_phone_black_24dp"
         android:text="Call Now"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.9" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="269dp"
-        android:layout_height="189dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name" />
+
+    <TextView
+        android:id="@+id/message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Message" />
+
+    <TextView
+        android:id="@+id/dposted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="dposted" />
+
+    <TextView
+        android:id="@+id/creatorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="creatorName" />
+
+    <TextView
+        android:id="@+id/message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="message" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

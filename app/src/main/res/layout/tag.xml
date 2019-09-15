@@ -7,6 +7,8 @@
     android:padding="3sp"
     android:layout_margin="3sp"
     android:textColor="@color/white"
+    android:clickable="true"
+    android:focusable="true"
     >
 
 </TextView>

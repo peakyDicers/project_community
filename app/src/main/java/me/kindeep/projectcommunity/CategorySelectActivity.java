@@ -76,7 +76,7 @@ public class CategorySelectActivity extends AppCompatActivity {
         Globals g = (Globals) getApplication();
 
         if (g.getLastUsedFilter() == null) {
-            Toast.makeText(CategorySelectActivity.this, "is null... Size of cats ", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(CategorySelectActivity.this, "is null... Size of cats ", Toast.LENGTH_SHORT).show();
             g.setLastUsedFilter(new ArrayList<Catagory>());
         }
 

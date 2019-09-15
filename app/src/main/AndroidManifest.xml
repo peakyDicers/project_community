@@ -22,6 +22,7 @@
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /> <!-- <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" /> -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
+
     <meta-data
         android:name="com.google.android.geo.API_KEY"
         android:value="AIzaSyAk3auUS5ZyiJpAXWrosYSqay2SH5cFiIk" />
@@ -72,7 +73,6 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-
 
 
         <activity android:name=".MainActivity" />
