@@ -56,18 +56,15 @@ public class PostingsActivity extends AppCompatActivity {
     }
 
     void saveFilterSettings() {
-        Toast.makeText(this, "Filter saved", Toast.LENGTH_SHORT).show();
         Globals g = (Globals) getApplication();
-        Log.e("dpo", "was' " + g.getLastUsedFilter().size() );
-        if(g.getLastUsedFilter().size() > this.filter_categories.size()) {
-            // not a good fix.
-            return;
-        }
+
         if( this.filter_categories != null) {
+            if(g.getLastUsedFilter() != null && g.getLastUsedFilter().size() > this.filter_categories.size()) {
+                // not a good fix.
+                return;
+            }
             g.setLastUsedFilter(this.filter_categories);
         }
-
-        Log.e("dpo",  " is now " + g.getLastUsedFilter().size());
     }
 
     void recoverFilterSettings() {

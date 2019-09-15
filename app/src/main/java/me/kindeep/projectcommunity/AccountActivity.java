@@ -17,6 +17,7 @@ public class AccountActivity extends AppCompatActivity {
     FlexboxLayout skillsFlex;
     FlexboxLayout interestsFlex;
     Account account;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +25,7 @@ public class AccountActivity extends AppCompatActivity {
 
 
         account = new Account("John", "doe", "123 street");
-        Globals g = (Globals)getApplication();
+        Globals g = (Globals) getApplication();
         g.setMainUser(account);
 
         skillsFlex = findViewById(R.id.skills);
@@ -48,6 +49,7 @@ public class AccountActivity extends AppCompatActivity {
         });
 
     }
+
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
     private void dispatchTakePictureIntent() {
@@ -55,6 +57,12 @@ public class AccountActivity extends AppCompatActivity {
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
+    }
+
+    public void closePage(View v) {
+        Intent i = new Intent(AccountActivity.this, PostingsActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
     }
 
 }

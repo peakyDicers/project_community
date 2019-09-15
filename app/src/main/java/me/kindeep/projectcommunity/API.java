@@ -21,6 +21,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,19 +38,19 @@ public class API {
     List<Posting> postings = new ArrayList<Posting>();
     Account account = null;
 
-    private API(){
+    private API() {
         db = FirebaseFirestore.getInstance();
     }
 
-    public static API getInstance(){
-        if (instance == null){
+    public static API getInstance() {
+        if (instance == null) {
             instance = new API();
             instance.listenForPosts();
         }
         return instance;
     }
 
-    public void createPost(Posting p, final View v){
+    public void createPost(Posting p, final View v) {
         Map<String, Object> post = new HashMap<>();
         post.put("creator_id", LoginManager.getInstance().getCurrentUser().id);
         post.put("date_created", new Timestamp(p.dPosted));
@@ -77,7 +78,7 @@ public class API {
                 });
     }
 
-     List<Catagory> getCategories(){
+    List<Catagory> getCategories() {
         List<Catagory> result = new ArrayList<>();
         result.add(new Catagory("Home", "#f1c40f"));
         result.add(new Catagory("Vehicle", "#28b463"));
@@ -88,7 +89,7 @@ public class API {
         return result;
     }
 
-    private void listenForPosts(){
+    private void listenForPosts() {
         db.collection("posts")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
@@ -106,9 +107,9 @@ public class API {
 
 
                             Posting p = new Posting(null,
-                                    (String)data.get("description"),
-                                    ((Timestamp)data.get("date_created")).toDate(),
-                                    ((Timestamp)data.get("date_due")).toDate(),
+                                    (String) data.get("description"),
+                                    data.get("date_created") != null ? ((Timestamp) data.get("date_created")).toDate() : new Date(),
+                                    data.get("date_due") != null ? ((Timestamp) data.get("date_due")).toDate() : new Date(),
                                     new Account("ian", "222", "123 street")
                             );
                             postings.add(p);
@@ -118,7 +119,7 @@ public class API {
                 });
     }
 
-    public List<Posting> getAllPosts(){
+    public List<Posting> getAllPosts() {
         postings = new ArrayList<Posting>();
         db.collection("posts")
                 .get()
@@ -130,10 +131,10 @@ public class API {
                                 Log.d(TAG, document.getId() + " => " + document.getData());
                                 Map<String, Object> data = document.getData();
                                 Posting p = new Posting(null,
-                                        (String)data.get("description"),
-                                        ((Timestamp)data.get("date_created")).toDate(),
-                                        ((Timestamp)data.get("date_due")).toDate(),
-                                        getUser((String)data.get("creator_id"))
+                                        (String) data.get("description"),
+                                        ((Timestamp) data.get("date_created")).toDate(),
+                                        ((Timestamp) data.get("date_due")).toDate(),
+                                        getUser((String) data.get("creator_id"))
                                 );
                                 postings.add(p);
                             }
@@ -147,7 +148,7 @@ public class API {
 
     }
 
-    public void deletePost(String postId){
+    public void deletePost(String postId) {
         DocumentReference docRef = db.collection("posts").document(postId);
 
 // Remove the 'capital' field from the document
@@ -156,7 +157,7 @@ public class API {
 
     }
 
-    public Account getUser(String userId){
+    public Account getUser(String userId) {
         DocumentReference docRef = db.collection("users").document(userId);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -169,16 +170,16 @@ public class API {
                         Map<String, Object> data = document.getData();
 
                         account = new Account(
-                                (String)data.get("displayName"),
-                                (String)document.getId(),
-                                (String)data.get("address")
+                                (String) data.get("displayName"),
+                                (String) document.getId(),
+                                (String) data.get("address")
                         );
                     } else {
                         account = new Account(null, null, null);
                         Log.d(TAG, "No such document");
                     }
                 } else {
-                    account = new Account( null, null, null);
+                    account = new Account(null, null, null);
                     Log.d(TAG, "get failed with ", task.getException());
                 }
             }

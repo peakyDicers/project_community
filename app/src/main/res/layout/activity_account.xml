@@ -1,27 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-
-    <LinearLayout
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="8sp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ImageView
 
-            android:id="@+id/profile_picture"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8sp"
+            android:orientation="horizontal">
 
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:src="@drawable/cat"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="@color/colorPrimary"/>
+            <ImageView
+
+                android:id="@+id/profile_picture"
+
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:background="@color/colorPrimary"
+                android:src="@drawable/cat"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8sp"
+                    android:layout_marginBottom="4sp"
+                    android:text="name"
+                    android:textSize="32sp"
+                    app:layout_constraintLeft_toRightOf="@id/profile_picture"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8sp"
+
+                    android:layout_marginTop="4sp"
+                    android:text="address"
+                    android:textSize="24sp"
+                    app:layout_constraintLeft_toRightOf="@id/profile_picture"
+                    app:layout_constraintTop_toBottomOf="@id/name"
+
+                    />
+
+                <Button
+                    android:id="@+id/buttonPic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16sp"
+                    android:background="@drawable/button_rounded_ripple"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:text="Choose profile picture"
+
+                    />
+            </LinearLayout>
+
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,151 +81,99 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8sp"
-                android:layout_marginBottom="4sp"
-                android:text="name"
-                android:textSize="32sp"
-                app:layout_constraintLeft_toRightOf="@id/profile_picture"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:text="Skills"
+                android:textSize="24sp" />
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/skills"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8sp"
+                app:alignContent="flex_start"
+                app:alignItems="flex_start"
+                app:flexWrap="wrap">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8sp"
+                    android:background="@color/colorPrimary"
+                    android:text="wut" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8sp"
+                    android:background="@color/colorPrimary"
+                    android:text="wut" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8sp"
+                    android:background="@color/colorPrimary"
+                    android:text="wut" />
+
+            </com.google.android.flexbox.FlexboxLayout>
+
 
             <TextView
-                android:id="@+id/address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8sp"
-
-                android:layout_marginTop="4sp"
-                android:text="address"
-                android:textSize="24sp"
-                app:layout_constraintLeft_toRightOf="@id/profile_picture"
-                app:layout_constraintTop_toBottomOf="@id/name"
-
-                />
-
-            <Button
-                android:id="@+id/buttonPic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Choose profile picture"
-                android:background="@drawable/button_rounded_ripple"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_margin="16sp"
+                android:layout_margin="8sp"
+                android:text="Interests"
+                android:textSize="24sp" />
 
-                />
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/interests"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8sp"
+                app:alignContent="flex_start"
+                app:alignItems="flex_start"
+                app:flexWrap="wrap">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8sp"
+                    android:background="@color/colorPrimary"
+                    android:text="wut" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8sp"
+                    android:background="@color/colorPrimary"
+                    android:text="wut" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8sp"
+                    android:background="@color/colorPrimary"
+                    android:text="wut" />
+
+            </com.google.android.flexbox.FlexboxLayout>
         </LinearLayout>
-
-
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_margin="8sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Skills"
-            android:textSize="24sp"/>
-
-        <com.google.android.flexbox.FlexboxLayout
-            android:id="@+id/skills"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8sp"
-            app:alignContent="flex_start"
-            app:alignItems="flex_start"
-            app:flexWrap="wrap">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8sp"
-                android:background="@color/colorPrimary"
-                android:text="wut" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8sp"
-                android:background="@color/colorPrimary"
-                android:text="wut" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8sp"
-                android:background="@color/colorPrimary"
-                android:text="wut" />
-
-        </com.google.android.flexbox.FlexboxLayout>
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Interests"
-            android:layout_margin="8sp"
-            android:textSize="24sp"/>
-
-        <com.google.android.flexbox.FlexboxLayout
-            android:id="@+id/interests"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8sp"
-            app:alignContent="flex_start"
-            app:alignItems="flex_start"
-            app:flexWrap="wrap">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8sp"
-                android:background="@color/colorPrimary"
-                android:text="wut" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8sp"
-                android:background="@color/colorPrimary"
-                android:text="wut" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8sp"
-                android:background="@color/colorPrimary"
-                android:text="wut" />xt
-
-        </com.google.android.flexbox.FlexboxLayout>
-    </LinearLayout>
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:orientation="vertical">-->
-
-    <!--<androidx.recyclerview.widget.RecyclerView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_weight="1">-->
-
-
-    <!--</androidx.recyclerview.widget.RecyclerView>-->
-
-    <!--<androidx.recyclerview.widget.RecyclerView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_weight="1">-->
-
-
-    <!--</androidx.recyclerview.widget.RecyclerView>-->
-
-    <!--</LinearLayout>-->
-</LinearLayout>
+    <Button
+        android:id="@+id/close_profile_page"
+        style="@style/appButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16sp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button_rounded_ripple"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="closePage"
+        android:text="close"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout2" />
+</androidx.constraintlayout.widget.ConstraintLayout>

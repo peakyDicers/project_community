@@ -3,23 +3,20 @@
     package="me.kindeep.projectcommunity">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality.
     -->
-    <uses-feature android:name="android.hardware.camera"
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="true" />
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-<!--    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />-->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /> <!-- <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" /> -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
     <meta-data
@@ -34,11 +31,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-<!--        android:theme="@style/AppTheme">-->
-        <activity android:name=".CategorySelectActivity"></activity>
-
-
-        <activity android:name=".makePost"></activity>
+        <activity android:name="me.kindeep.projectcommunituy.PostActivity"></activity>
+        <!-- android:theme="@style/AppTheme"> -->
+        <activity android:name=".CategorySelectActivity" />
+        <activity android:name=".makePost" />
         <activity android:name=".PostingActivity" />
         <activity android:name=".PostingsActivity" />
         <activity android:name=".EditableAccountActivity" />
@@ -51,11 +47,7 @@
         </activity>
         <activity
             android:name=".AccountActivity"
-
-          
-
-            android:label="@string/title_activity_account"></activity>
-
+            android:label="@string/title_activity_account" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -64,7 +56,6 @@
              sign the APK for publishing.
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
@@ -75,7 +66,7 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".MainActivity">
-        </activity>
+        <activity android:name=".MainActivity"></activity>
     </application>
+
 </manifest>
