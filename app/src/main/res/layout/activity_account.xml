@@ -149,7 +149,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8sp"
                 android:background="@color/colorPrimary"
-                android:text="wut" />
+                android:text="wut" />xt
 
         </com.google.android.flexbox.FlexboxLayout>
     </LinearLayout>
