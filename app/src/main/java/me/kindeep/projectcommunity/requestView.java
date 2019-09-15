@@ -40,4 +40,10 @@ public class requestView extends AppCompatActivity {
             Log.e("Didnt call", "didnt call");
         }
     }
+
+    public void cancel(View v) {
+        Intent i = new Intent(requestView.this, PostingsActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
+    }
 }
