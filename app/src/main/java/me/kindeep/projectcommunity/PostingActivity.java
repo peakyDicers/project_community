@@ -63,7 +63,11 @@ public class PostingActivity extends AppCompatActivity {
                         new Date(cal.getDate()),
                         auth.getCurrentUser().getDisplayName(),
                         auth.getCurrentUser().getUid()
+<<<<<<< Updated upstream
                 );
+=======
+                        );
+>>>>>>> Stashed changes
 
                     p.setLocation(latitude, longitude);
                 API.getInstance().createPost(p, v);
