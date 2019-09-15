@@ -21,7 +21,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +51,8 @@ public class API {
 
     public void createPost(Posting p, final View v) {
         Map<String, Object> post = new HashMap<>();
-        post.put("creator_id", LoginManager.getInstance().getCurrentUser().id);
+        post.put("creator_id", p.creatorId);
+        post.put("creator_name", p.creatorName);
         post.put("date_created", new Timestamp(p.dPosted));
         post.put("description", p.message);
         post.put("latitude", 0);
@@ -78,7 +78,7 @@ public class API {
                 });
     }
 
-    List<Catagory> getCategories() {
+    public List<Catagory> getCategories() {
         List<Catagory> result = new ArrayList<>();
         result.add(new Catagory("Home", "#f1c40f"));
         result.add(new Catagory("Vehicle", "#28b463"));
@@ -104,45 +104,46 @@ public class API {
                         for (QueryDocumentSnapshot doc : value) {
                             Log.e("wow", doc.toString());
                             Map<String, Object> data = doc.getData();
-
-
-                            Posting p = new Posting(null,
+                            Posting p = new Posting(
+                                    null,
                                     (String) data.get("description"),
-                                    data.get("date_created") != null ? ((Timestamp) data.get("date_created")).toDate() : new Date(),
-                                    data.get("date_due") != null ? ((Timestamp) data.get("date_due")).toDate() : new Date(),
-                                    new Account("ian", "222", "123 street")
+                                    ((Timestamp)data.get("date_created")).toDate(),
+                                    (String)data.get("creator_name"),
+                                    (String)data.get("creator_id")
                             );
                             postings.add(p);
                         }
-                        Log.d(TAG, "Current cites in CA: " + cities);
+                        Log.d(TAG, "POSTINGS HAS BEEN UPDATED.");
                     }
                 });
     }
 
+    @Deprecated
     public List<Posting> getAllPosts() {
-        postings = new ArrayList<Posting>();
-        db.collection("posts")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                                Map<String, Object> data = document.getData();
-                                Posting p = new Posting(null,
-                                        (String) data.get("description"),
-                                        ((Timestamp) data.get("date_created")).toDate(),
-                                        ((Timestamp) data.get("date_due")).toDate(),
-                                        getUser((String) data.get("creator_id"))
-                                );
-                                postings.add(p);
-                            }
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
+//        postings = new ArrayList<Posting>();
+//        db.collection("posts")
+//                .get()
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if (task.isSuccessful()) {
+//                            for (QueryDocumentSnapshot document : task.getResult()) {
+//                                Log.d(TAG, document.getId() + " => " + document.getData());
+//                                Map<String, Object> data = document.getData();
+//                                Posting p = new Posting(
+//                                        null,
+//                                        (String) data.get("description"),
+//                                        ((Timestamp) data.get("date_created")).toDate(),
+//                                        (String)data.get("creator_name"),
+//                                        (String)data.get("creator_id")
+//                                );
+//                                postings.add(p);
+//                            }
+//                        } else {
+//                            Log.d(TAG, "Error getting documents: ", task.getException());
+//                        }
+//                    }
+//                });
 
         return null;
 

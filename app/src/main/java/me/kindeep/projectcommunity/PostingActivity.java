@@ -9,6 +9,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Date;
 
@@ -24,7 +25,7 @@ public class PostingActivity extends AppCompatActivity {
 
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
+                FirebaseAuth auth = FirebaseAuth.getInstance();
                 //get date.
                 CalendarView cal =  findViewById(R.id.calendarView);
                 Timestamp timeStamp = new Timestamp(new Date(cal.getDate()));
@@ -33,11 +34,17 @@ public class PostingActivity extends AppCompatActivity {
                 EditText description = findViewById(R.id.descriptionText);
 
                 //build the post.
-                Posting p = new Posting(null, description.getText().toString(), new Date(cal.getDate()), null, LoginManager.getInstance().getCurrentUser());
+                Posting p = new Posting(
+                        null,
+                        description.getText().toString(),
+                        new Date(cal.getDate()),
+                        auth.getCurrentUser().getDisplayName(),
+                        auth.getCurrentUser().getUid()
+                        );
+
 
                 API.getInstance().createPost(p, v);
             }
         });
-
     }
 }

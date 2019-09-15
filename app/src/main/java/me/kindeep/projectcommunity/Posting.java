@@ -1,38 +1,46 @@
 package me.kindeep.projectcommunity;
 
+import com.google.firebase.Timestamp;
 
 import java.util.Date;
 
 public class Posting {
     public Catagory[] catagories;
-    public String message;
+    public String message = "";
     public Date dPosted;
-    public Date dDue;
+    public String id = "";
+    public String creatorName = "";
+    public String creatorId = "";
+    public String title = "Title";
     public boolean resolved;
-    public Account accountPosted;
-    public String title = "Whoooooooo";
-    public String id = "yuuuut";
+    public float latitude = 0;
+    public float longitude = 0;
 
 
-    public Posting(Catagory[] c, String messageC, Date dPostedC, Date dDueC, Account accountPostedC) {
-        catagories = c;
-        message = messageC;
-        dPosted = dPostedC;
-        dDue = dDueC;
+    public Posting(Catagory[] catagories, String message, Date dPosted, String creatorName, String creatorId) {
+        this.catagories = catagories;
+        this.message = message;
+        this.dPosted = dPosted;
+        this.creatorName = creatorName;
+        this.creatorId = creatorId;
         resolved = false;
-        accountPosted = accountPostedC;
+    }
+
+    public void setLocation(float latitude, float longitude){
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    public Timestamp getTimeStamp(){
+        return new Timestamp(dPosted);
     }
 
     public void setResolved() {
         resolved = true;
     }
 
-    public Account getUser() {
-        return accountPosted;
-    }
-
     public String getFirstName() {
-        return accountPosted.getFirstName();
+        return creatorName;
     }
 
     @Override

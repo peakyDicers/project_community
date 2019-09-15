@@ -30,6 +30,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +79,7 @@ public class PostingsActivity extends AppCompatActivity {
     }
 
     public void removeTagFromFilter(View v) {
-        Log.d("Waut", v.toString());
+
         TextView tv = ((View) v.getParent().getParent()).findViewById(R.id.tag_name);
         int index = 0;
         for (Catagory val : filter_categories) {
@@ -89,7 +90,7 @@ public class PostingsActivity extends AppCompatActivity {
             index ++;
         }
 
-        Log.d("Size", filter_categories.size() + "");
+
         tag_container.update();
     }
 
@@ -111,18 +112,7 @@ public class PostingsActivity extends AppCompatActivity {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         recoverFilterSettings();
 
-//        int value = savedInstanceState.getInt("selected_category_index");
-//        if (value != -1) {
-//
-//        }
         findViewById(R.id.category_filter);
-
-//        filter_categories.add(new Catagory("Wut", "#ff00ff"));
-//        filter_categories.add(new Catagory("Wut", "#ff00ff"));
-//        filter_categories.add(new Catagory("Wut", "#ff00ff"));
-//        filter_categories.add(new Catagory("Wut", "#ff00ff"));
-//        filter_categories.add(new Catagory("Wut", "#ff00ff"));
-//        filter_categories.add(new Catagory("Wut", "#ff00ff"));
 
         tag_container = new ExtendedCustomTagLayout((FlexboxLayout) findViewById(R.id.category_filter), filter_categories, R.layout.tag_closeable);
 
@@ -133,13 +123,9 @@ public class PostingsActivity extends AppCompatActivity {
         postings = API.getInstance().postings;
         setLocations();
 
-//        Log.e("size", postings.size() + "");
-
-
         // Gets the MapView from the XML layout and creates it
         mapView.onCreate(savedInstanceState);
         setupMapView();
-
 
         recyclerView.setAdapter(new RecyclerView.Adapter() {
 
@@ -175,14 +161,6 @@ public class PostingsActivity extends AppCompatActivity {
                 hol.title.setText(postings.get(position).title);
 
                 hol.desc.setText(postings.get(position).message);
-
-//                ArrayList<Catagory> list = new ArrayList<>();
-//                list.add(new Catagory("Wut", "#ff00ff"));
-//                list.add(new Catagory("Wut", "#ff00ff"));
-//                list.add(new Catagory("Wut", "#ff00ff"));
-//                list.add(new Catagory("Wut", "#ff00ff"));
-//                list.add(new Catagory("Wut", "#ff00ff"));
-//                list.add(new Catagory("Wut", "#ff00ff"));
 
                 new CustomTagLayout(hol.skills, API.getInstance().getCategories());
             }
@@ -251,18 +229,18 @@ public class PostingsActivity extends AppCompatActivity {
 
                 for (Posting p : API.getInstance().getAllPosts() != null? API.getInstance().getAllPosts() : new ArrayList<Posting>()) {
                     Globals g = (Globals) getApplication();
-                    if (p.getUser() != g.getMainUser()) {
+                    if (p.creatorId.compareTo(FirebaseAuth.getInstance().getUid()) == 0) {
                       //  Location loc1 = new Location("");
                        // loc1.setLatitude(loca);
                         //loc1.setLongitude(lon1);
 
                         Location loc2 = new Location("");
-                        loc2.setLatitude(p.getUser().x);
-                        loc2.setLongitude(p.getUser().y);
+                        loc2.setLatitude(p.latitude);
+                        loc2.setLongitude(p.longitude);
 
 
                         float distanceInMeters = currentLocation.distanceTo(loc2);
-                        LatLng neighbor = new LatLng(p.getUser().x, p.getUser().y);
+                        LatLng neighbor = new LatLng(p.latitude, p.longitude);
 
                         mMap.addMarker(new MarkerOptions().position(neighbor).icon(p.catagories[0].getMarkerColour()).title(p.getFirstName()) .snippet(""+distanceInMeters+"km away\n"+p.toString()));
 
