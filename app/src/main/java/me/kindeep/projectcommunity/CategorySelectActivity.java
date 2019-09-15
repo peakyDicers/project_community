@@ -32,13 +32,13 @@ public class CategorySelectActivity extends AppCompatActivity {
 
         spinner = findViewById(R.id.spinner);
 
-        final Button button = findViewById(R.id.button3);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent i = new Intent(CategorySelectActivity.this,PostingActivity.class);
-                startActivity(i);
-            }
-        });
+//        final Button button = findViewById(R.id.button3);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                Intent i = new Intent(CategorySelectActivity.this,PostingActivity.class);
+//                startActivity(i);
+//            }
+//        });
 //        String[] stringArray = Arrays.copyOf(API.getInstance().getCategories().toArray(), API.getInstance().getCategories().size(), String[].class);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
