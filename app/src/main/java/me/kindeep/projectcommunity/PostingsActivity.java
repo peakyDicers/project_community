@@ -1,5 +1,4 @@
 package me.kindeep.projectcommunity;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -110,6 +109,8 @@ public class PostingsActivity extends AppCompatActivity {
 
     }
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,15 +150,19 @@ public class PostingsActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         int itemPosition = recyclerView.getChildLayoutPosition(view);
                         Intent i = new Intent(PostingsActivity.this, requestView.class);
+//
+                        Globals g = (Globals) getApplication();
 
-                        Bundle b = new Bundle();
-                        b.putString("posting_id", postings.get(itemPosition).getId());
+                        g.setPosting(postings.get(itemPosition));
                         startActivity(i);
                     }
                 });
 
                 return new PostingHolder(v,  (TextView) v.findViewById(R.id.description), (FlexboxLayout) v.findViewById(R.id.skills), (TextView) v.findViewById(R.id.bytext));
+
             }
+
+//            findPostingById
 
             @Override
             public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
@@ -174,8 +179,10 @@ public class PostingsActivity extends AppCompatActivity {
                 return postings.size();
             }
         });
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(PostingsActivity.this));
+        LinearLayoutManager llm = new LinearLayoutManager(PostingsActivity.this);
+        llm.setReverseLayout(true);
+        llm.scrollToPositionWithOffset(postings.size() - 1, 0);
+        recyclerView.setLayoutManager(llm);
     }
 
     private void listenForPosts() {
@@ -279,7 +286,7 @@ public class PostingsActivity extends AppCompatActivity {
 
                         //use commented if catagories are always available.
                         //mMap.addMarker(new MarkerOptions().position(neighbor).icon(p.catagories[0].getMarkerColour()).title(p.getFirstName()) .snippet(""+distanceInMeters+"km away\n"+p.toString()));
-                        mMap.addMarker(new MarkerOptions().position(neighbor).title(p.getFirstName()) .snippet(""+distanceInMeters+"km away\n"+p.toString()));
+                        mMap.addMarker(new MarkerOptions().position(neighbor).title(p.getFirstName()) .snippet(""+Math.round(distanceInMeters/1000)+"km away\n"+p.toString()));
                     }
                 }
             }

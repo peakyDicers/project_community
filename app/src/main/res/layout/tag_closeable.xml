@@ -5,6 +5,8 @@
     android:background="#ff0000"
     android:layout_margin="2sp"
     android:padding="2sp"
+    android:clickable="true"
+    android:focusable="true"
     >
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
