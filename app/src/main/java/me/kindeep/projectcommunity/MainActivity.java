@@ -39,8 +39,6 @@ public class MainActivity extends AppCompatActivity {
                 LoginManager.getInstance().signOut();
             }
         });
-
-        API.getInstance(); //don't remove this. required to start listening for database changes.
     }
 
     public void openAccount(View view) {

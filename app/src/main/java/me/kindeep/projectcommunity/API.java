@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -14,11 +13,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,7 +39,6 @@ public class API {
     public static API getInstance() {
         if (instance == null) {
             instance = new API();
-            instance.listenForPosts();
         }
         return instance;
     }
@@ -89,39 +83,7 @@ public class API {
         return result;
     }
 
-    private void listenForPosts() {
-        db.collection("posts")
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value,
-                                        @Nullable FirebaseFirestoreException e) {
-                        if (e != null) {
-                            Log.w(TAG, "Listen failed.", e);
-                            return;
-                        }
-                        postings.clear();
-                        List<String> cities = new ArrayList<>();
-                        for (QueryDocumentSnapshot doc : value) {
-                            Map<String, Object> data = doc.getData();
-                            Posting p = new Posting(
-                                    null,
-                                    (String) data.get("description"),
-                                    ((Timestamp)data.get("date_created")).toDate(),
-                                    (String)data.get("creator_name"),
-                                    (String)data.get("creator_id")
-                            );
 
-                            //set location.
-                            float latitude = ((Double)data.get("latitude")).floatValue();
-                            float longitude = ((Double)data.get("longitude")).floatValue();
-                            p.setLocation(latitude, longitude);
-                            postings.add(p);
-                        }
-
-                        Log.d(TAG, "POSTINGS HAS BEEN UPDATED.");
-                    }
-                });
-    }
 
     @Deprecated
     public List<Posting> getAllPosts() {

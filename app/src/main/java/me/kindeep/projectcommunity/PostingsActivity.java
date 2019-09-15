@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -29,15 +30,23 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class PostingsActivity extends AppCompatActivity {
     private static int MAP_REQUEST_CODE = 100;
 
     RecyclerView recyclerView;
     MapView mapView;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     //below
     private FusedLocationProviderClient fusedLocationClient;
@@ -101,8 +110,6 @@ public class PostingsActivity extends AppCompatActivity {
 
     }
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,6 +118,8 @@ public class PostingsActivity extends AppCompatActivity {
         recoverFilterSettings();
 
         findViewById(R.id.category_filter);
+
+        listenForPosts();
 
         tag_container = new ExtendedCustomTagLayout((FlexboxLayout) findViewById(R.id.category_filter), filter_categories, R.layout.tag_closeable);
 
@@ -124,6 +133,7 @@ public class PostingsActivity extends AppCompatActivity {
         // Gets the MapView from the XML layout and creates it
         mapView.onCreate(savedInstanceState);
         setupMapView();
+
 
         recyclerView.setAdapter(new RecyclerView.Adapter() {
 
@@ -147,10 +157,7 @@ public class PostingsActivity extends AppCompatActivity {
                 });
 
                 return new PostingHolder(v,  (TextView) v.findViewById(R.id.description), (FlexboxLayout) v.findViewById(R.id.skills), (TextView) v.findViewById(R.id.bytext));
-
             }
-
-//            findPostingById
 
             @Override
             public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
@@ -167,7 +174,44 @@ public class PostingsActivity extends AppCompatActivity {
                 return postings.size();
             }
         });
+
         recyclerView.setLayoutManager(new LinearLayoutManager(PostingsActivity.this));
+    }
+
+    private void listenForPosts() {
+        db.collection("posts")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value,
+                                        @Nullable FirebaseFirestoreException e) {
+                        String TAG = "LOL";
+                        if (e != null) {
+                            Log.w(TAG, "Listen failed.", e);
+                            return;
+                        }
+                        postings.clear();
+                        List<String> cities = new ArrayList<>();
+                        for (QueryDocumentSnapshot doc : value) {
+                            Map<String, Object> data = doc.getData();
+                            Posting p = new Posting(
+                                    null,
+                                    (String) data.get("description"),
+                                    ((Timestamp)data.get("date_created")).toDate(),
+                                    (String)data.get("creator_name"),
+                                    (String)data.get("creator_id")
+                            );
+
+                            //set location.
+                            float latitude = ((Double)data.get("latitude")).floatValue();
+                            float longitude = ((Double)data.get("longitude")).floatValue();
+                            p.setLocation(latitude, longitude);
+                            postings.add(p);
+                            recyclerView.getAdapter().notifyDataSetChanged();
+                        }
+
+                        Log.d(TAG, "POSTINGS HAS BEEN UPDATED.");
+                    }
+                });
     }
 
     private void checkAndRequstMapPermissions() {
