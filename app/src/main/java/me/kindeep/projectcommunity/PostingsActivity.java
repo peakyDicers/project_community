@@ -1,5 +1,4 @@
 package me.kindeep.projectcommunity;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -235,7 +234,7 @@ public class PostingsActivity extends AppCompatActivity {
 
                         //use commented if catagories are always available.
                         //mMap.addMarker(new MarkerOptions().position(neighbor).icon(p.catagories[0].getMarkerColour()).title(p.getFirstName()) .snippet(""+distanceInMeters+"km away\n"+p.toString()));
-                        mMap.addMarker(new MarkerOptions().position(neighbor).title(p.getFirstName()) .snippet(""+distanceInMeters+"km away\n"+p.toString()));
+                        mMap.addMarker(new MarkerOptions().position(neighbor).title(p.getFirstName()) .snippet(""+Math.round(distanceInMeters/1000)+"km away\n"+p.toString()));
                     }
                 }
             }
