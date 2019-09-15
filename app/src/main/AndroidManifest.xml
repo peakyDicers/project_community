@@ -73,11 +73,11 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-<<<<<<< Updated upstream
-        <activity android:name=".MainActivity"></activity>
-=======
+
+
+
         <activity android:name=".MainActivity" />
->>>>>>> Stashed changes
+
     </application>
 
 </manifest>
