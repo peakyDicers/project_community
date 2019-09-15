@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="@color/colorPrimaryDark">
+    android:color="#000000">
     <item android:id="@android:id/mask">
         <shape android:shape="rectangle">
-            <solid android:color="@color/colorAccent" />
-            <corners android:radius="@dimen/radius_large" />
+            <solid android:color="#000000" />
+            <corners android:radius="0sp" />
         </shape>
     </item>
 
@@ -12,10 +12,10 @@
         <shape android:shape="rectangle">
             <gradient
                 android:angle="90"
-                android:endColor="@color/colorEndAccent"
-                android:startColor="@color/colorStartAccent"
+                android:endColor="#000000"
+                android:startColor="#000000"
                 android:type="linear" />
-            <corners android:radius="@dimen/radius_large" />
+            <corners android:radius="0sp" />
         </shape>
     </item>
 </ripple>

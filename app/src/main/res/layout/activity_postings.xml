@@ -1,64 +1,85 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent">-->
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-
-
-        <com.google.android.flexbox.FlexboxLayout
-            android:id="@+id/category_filter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8sp"
-            app:alignContent="flex_start"
-            app:alignItems="flex_start"
-            app:flexWrap="wrap"
-            android:layout_weight="1">
-
-        </com.google.android.flexbox.FlexboxLayout>
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="48sp"
-            android:layout_height="48sp"
-            app:srcCompat="@drawable/cat"
-            android:layout_weight="0"
-            android:clickable="true"
-            android:focusable="true"
-            android:background="@drawable/rectangle_ripple"
-            android:onClick="openUserProfile"/>
-
-
-    </LinearLayout>
-
-    <com.google.android.gms.maps.MapView
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/mapView">
-
-    </com.google.android.gms.maps.MapView>
-
-
-    <LinearLayout
-        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/category_filter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8sp"
+                android:layout_weight="1"
+                app:alignContent="flex_start"
+                app:alignItems="flex_start"
+                app:flexWrap="wrap">
+
+            </com.google.android.flexbox.FlexboxLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="48sp"
+                android:layout_height="48sp"
+                android:layout_weight="0"
+                android:background="@drawable/rectangle_ripple_black"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="openUserProfile"
+                app:srcCompat="@drawable/cat" />
+
+
+        </LinearLayout>
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            style="@style/appButton">
+            android:layout_weight="1">
 
-        </androidx.recyclerview.widget.RecyclerView>
+        </com.google.android.gms.maps.MapView>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </LinearLayout>
 
     </LinearLayout>
-</LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floating_action_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="16dp"
+        app:srcCompat="@drawable/ic_add_white_24dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="openCreatePosting"
+        android:background="@color/colorAccent"
+        android:backgroundTint="@color/colorAccent"
+        />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout><!--</androidx.constraintlayout.widget.ConstraintLayout>-->

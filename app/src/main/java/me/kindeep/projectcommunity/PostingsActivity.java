@@ -100,17 +100,15 @@ public class PostingsActivity extends AppCompatActivity {
 
         startActivity(i);
 
-        Toast.makeText(PostingsActivity.this, "Add a category", Toast.LENGTH_SHORT).show();
     }
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //below
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_postings);
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         recoverFilterSettings();
 
 //        int value = savedInstanceState.getInt("selected_category_index");
@@ -313,6 +311,11 @@ public class PostingsActivity extends AppCompatActivity {
 
     public void openUserProfile(View v) {
         Intent i = new Intent(PostingsActivity.this,AccountActivity.class);
+        startActivity(i);
+    }
+
+    public void openCreatePosting(View v) {
+        Intent i = new Intent(PostingsActivity.this,PostingActivity.class);
         startActivity(i);
     }
 

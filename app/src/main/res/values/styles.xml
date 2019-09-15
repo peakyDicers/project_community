@@ -19,6 +19,7 @@
     <style name = "appButton">
         <item name = "android:padding">4sp</item>
         <item name="android:layout_margin">8sp</item>
+        <item name="android:background">@drawable/button_rounded_ripple</item>
     </style>
 
 </resources>
