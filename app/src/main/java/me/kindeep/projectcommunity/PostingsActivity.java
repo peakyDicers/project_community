@@ -296,6 +296,7 @@ public class PostingsActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+
 }
 
 

@@ -3,7 +3,7 @@
     <color name="colorPrimary">#f9a825</color>
     <color name="colorPrimaryDark">#c17900</color>
     <color name="colorPrimaryLight">#ffd95a</color>
-    <color name="colorAccent">#f9a825</color>
+    <color name="colorAccent">#AF0006</color>
     <color name="cardBackground">#F8E8CC</color>
 
     <color name="colorStartAccent">#AF0006</color>
@@ -14,4 +14,10 @@
     <color name="cardStart">#F8E8CC</color>
     <color name="cardEnd">#FAE5C1</color>
     <color name="white">#ffffff</color>
+    <color name="spin">#DADADA</color>
+    <color name="spinStart">#CECECE</color>
+    <color name="spinEnd">#B9B9B9</color>
+    <color name="btnText">#B9B9B9</color>
+
+
 </resources>
