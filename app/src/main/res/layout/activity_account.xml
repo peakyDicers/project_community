@@ -57,7 +57,13 @@
                 android:id="@+id/buttonPic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Choose profile picture" />
+                android:text="Choose profile picture"
+                android:background="@drawable/button_rounded_ripple"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_margin="16sp"
+
+                />
         </LinearLayout>
 
 

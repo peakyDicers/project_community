@@ -11,9 +11,10 @@
         android:id="@+id/tag_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="2sp"
-        android:padding="2sp"
-        android:text="Wuttt">
+        android:layout_margin="1sp"
+        android:padding="1sp"
+        android:text="Wuttt"
+        android:textColor="@color/white">
 
 
     </TextView>

@@ -289,6 +289,12 @@ public class PostingsActivity extends AppCompatActivity {
         saveFilterSettings();
         super.onDestroy();
     }
+
+    public void openUserProfile(View v) {
+        Intent i = new Intent(PostingsActivity.this,AccountActivity.class);
+        startActivity(i);
+    }
+
 }
 
 

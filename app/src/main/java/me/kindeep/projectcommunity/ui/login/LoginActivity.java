@@ -37,6 +37,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 import me.kindeep.projectcommunity.LoginManager;
 import me.kindeep.projectcommunity.MainActivity;
+import me.kindeep.projectcommunity.PostingsActivity;
 import me.kindeep.projectcommunity.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -66,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loadMainApp(){
-        Intent myIntent = new Intent(this, MainActivity.class);
+        Intent myIntent = new Intent(this, PostingsActivity.class);
         startActivity(myIntent);
     }
 

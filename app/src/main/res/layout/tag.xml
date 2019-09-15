@@ -4,8 +4,9 @@
     android:id="@+id/tag_name"
     android:text="Wuttt"
     android:background="#ff0000"
-    android:padding="2sp"
-    android:layout_margin="2sp"
+    android:padding="3sp"
+    android:layout_margin="3sp"
+    android:textColor="@color/white"
     >
 
 </TextView>

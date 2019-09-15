@@ -12,6 +12,8 @@
     android:layout_marginTop="8sp"
     android:layout_marginLeft="8sp"
     android:layout_marginRight="8sp"
+    android:drawableTint="@color/colorPrimary"
+
     >
 
     <TextView

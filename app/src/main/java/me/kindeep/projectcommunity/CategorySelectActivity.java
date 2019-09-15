@@ -103,4 +103,11 @@ public class CategorySelectActivity extends AppCompatActivity {
 //        this.bundle.putInt("selected_category_index", this.pos_selected);
         startActivity(i, this.bundle);
     }
+
+    public void cancelSelection(View v) {
+        Intent i = new Intent(CategorySelectActivity.this, PostingsActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i, this.bundle);
+    }
+
 }
