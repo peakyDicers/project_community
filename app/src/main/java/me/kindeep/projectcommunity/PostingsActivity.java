@@ -151,10 +151,11 @@ public class PostingsActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         int itemPosition = recyclerView.getChildLayoutPosition(view);
                         Intent i = new Intent(PostingsActivity.this, requestView.class);
+//
+                        Globals g = (Globals) getApplication();
 
-                        Bundle b = new Bundle();
-                        b.putString("posting_id", postings.get(itemPosition).getId());
-                        startActivity(i, b);
+                        g.setPosting(postings.get(itemPosition));
+                        startActivity(i);
                     }
                 });
 

@@ -6,6 +6,59 @@
     android:layout_height="match_parent"
     tools:context="me.kindeep.projectcommunity.requestView">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textAlignment="center"
+        >
+
+        <TextView
+            android:id="@+id/message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Message"
+            android:textSize="32sp"
+            android:textAlignment="center"
+
+            />
+
+        <TextView
+            android:id="@+id/creatorName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:textSize="16sp"
+            android:textAlignment="center"
+
+            android:text="creatorName" />
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textAlignment="center"
+
+            android:text="Name" />
+
+        <TextView
+            android:id="@+id/dposted"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textAlignment="center"
+
+            android:text="dposted" />
+    </LinearLayout>
+
     <ImageView
         android:id="@+id/button3"
         android:layout_width="64sp"
@@ -22,34 +75,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Name" />
-
-    <TextView
-        android:id="@+id/message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Message" />
-
-    <TextView
-        android:id="@+id/dposted"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="dposted" />
-
-    <TextView
-        android:id="@+id/creatorName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="creatorName" />
-
-    <TextView
-        android:id="@+id/message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="message" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
