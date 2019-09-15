@@ -226,26 +226,19 @@ public class PostingsActivity extends AppCompatActivity {
                 }
 
 
-                for (Posting p : API.getInstance().getAllPosts() != null? API.getInstance().getAllPosts() : new ArrayList<Posting>()) {
-                    Globals g = (Globals) getApplication();
-                    if (p.creatorId.compareTo(FirebaseAuth.getInstance().getUid()) == 0) {
-                      //  Location loc1 = new Location("");
-                       // loc1.setLatitude(loca);
-                        //loc1.setLongitude(lon1);
+                for (Posting p : API.getInstance().postings) {
+                    Location loc2 = new Location("");
+                    loc2.setLatitude(p.latitude);
+                    loc2.setLongitude(p.longitude);
 
-                        Location loc2 = new Location("");
-                        loc2.setLatitude(p.latitude);
-                        loc2.setLongitude(p.longitude);
-
-
+                    if (currentLocation != null){
                         float distanceInMeters = currentLocation.distanceTo(loc2);
                         LatLng neighbor = new LatLng(p.latitude, p.longitude);
 
-                        mMap.addMarker(new MarkerOptions().position(neighbor).icon(p.catagories[0].getMarkerColour()).title(p.getFirstName()) .snippet(""+distanceInMeters+"km away\n"+p.toString()));
-
-
+                        //use commented if catagories are always available.
+                        //mMap.addMarker(new MarkerOptions().position(neighbor).icon(p.catagories[0].getMarkerColour()).title(p.getFirstName()) .snippet(""+distanceInMeters+"km away\n"+p.toString()));
+                        mMap.addMarker(new MarkerOptions().position(neighbor).title(p.getFirstName()) .snippet(""+distanceInMeters+"km away\n"+p.toString()));
                     }
-
                 }
             }
         });

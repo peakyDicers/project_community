@@ -55,8 +55,8 @@ public class API {
         post.put("creator_name", p.creatorName);
         post.put("date_created", new Timestamp(p.dPosted));
         post.put("description", p.message);
-        post.put("latitude", 0);
-        post.put("longitude", 0);
+        post.put("latitude", p.latitude);
+        post.put("longitude", p.longitude);
         post.put("address", "123 street.");
 
 
@@ -110,8 +110,14 @@ public class API {
                                     (String)data.get("creator_name"),
                                     (String)data.get("creator_id")
                             );
+
+                            //set location.
+                            float latitude = ((Double)data.get("latitude")).floatValue();
+                            float longitude = ((Double)data.get("longitude")).floatValue();
+                            p.setLocation(latitude, longitude);
                             postings.add(p);
                         }
+
                         Log.d(TAG, "POSTINGS HAS BEEN UPDATED.");
                     }
                 });

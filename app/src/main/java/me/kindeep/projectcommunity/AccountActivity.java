@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.flexbox.FlexboxLayout;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class AccountActivity extends AppCompatActivity {
 
@@ -24,7 +25,7 @@ public class AccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_account);
 
 
-        account = new Account("John", "doe", "123 street");
+        account = new Account("John", "doe", "742 Evergreen Terrace");
         Globals g = (Globals) getApplication();
         g.setMainUser(account);
 
@@ -38,7 +39,7 @@ public class AccountActivity extends AppCompatActivity {
             Toast.makeText(AccountActivity.this, "Did no worko", Toast.LENGTH_SHORT).show();
         }
 
-        ((TextView) findViewById(R.id.name)).setText(account.getFirstName() + " " + account.getLastName());
+        ((TextView) findViewById(R.id.name)).setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
 
         ((TextView) findViewById(R.id.address)).setText(account.getAddress());
         final Button button = findViewById(R.id.buttonPic);

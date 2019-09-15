@@ -13,8 +13,8 @@ public class Posting {
     public String creatorId = "";
     public String title = "Title";
     public boolean resolved;
-    public float latitude = 0;
-    public float longitude = 0;
+    public float latitude = 0.1f;
+    public float longitude = 0.1f;
 
 
     public Posting(Catagory[] catagories, String message, Date dPosted, String creatorName, String creatorId) {
