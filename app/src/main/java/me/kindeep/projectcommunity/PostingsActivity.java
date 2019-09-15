@@ -110,6 +110,8 @@ public class PostingsActivity extends AppCompatActivity {
 
     }
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -152,12 +154,15 @@ public class PostingsActivity extends AppCompatActivity {
 
                         Bundle b = new Bundle();
                         b.putString("posting_id", postings.get(itemPosition).getId());
-                        startActivity(i);
+                        startActivity(i, b);
                     }
                 });
 
                 return new PostingHolder(v,  (TextView) v.findViewById(R.id.description), (FlexboxLayout) v.findViewById(R.id.skills), (TextView) v.findViewById(R.id.bytext));
+
             }
+
+//            findPostingById
 
             @Override
             public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
@@ -174,8 +179,10 @@ public class PostingsActivity extends AppCompatActivity {
                 return postings.size();
             }
         });
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(PostingsActivity.this));
+        LinearLayoutManager llm = new LinearLayoutManager(PostingsActivity.this);
+        llm.setReverseLayout(true);
+        llm.scrollToPositionWithOffset(postings.size() - 1, 0);
+        recyclerView.setLayoutManager(llm);
     }
 
     private void listenForPosts() {

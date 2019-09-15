@@ -11,7 +11,7 @@ public class Posting {
     public String id = "";
     public String creatorName = "";
     public String creatorId = "";
-    public String title = "Title";
+//    public String title = "Title";
     public boolean resolved;
     public float latitude = 0.1f;
     public float longitude = 0.1f;
