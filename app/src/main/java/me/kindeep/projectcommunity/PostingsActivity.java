@@ -152,10 +152,23 @@ public class PostingsActivity extends AppCompatActivity {
                 LayoutInflater.from(parent.getContext()).inflate(R.layout.posting_tile, parent, false);
                 View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.posting_tile, parent, false);
 
+                v.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        int itemPosition = recyclerView.getChildLayoutPosition(view);
+                        Intent i = new Intent(PostingsActivity.this, PostActivity.class);
+
+                        Bundle b = new Bundle();
+                        b.putString("posting_id", postings.get(itemPosition).getId());
+                        startActivity(i);
+                    }
+                });
 
                 return new PostingHolder(v, (TextView) v.findViewById(R.id.title), (TextView) v.findViewById(R.id.description), (FlexboxLayout) v.findViewById(R.id.skills));
 
             }
+
+//            findPostingById
 
             @Override
             public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
