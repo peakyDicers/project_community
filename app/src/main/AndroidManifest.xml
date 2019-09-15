@@ -41,7 +41,6 @@
 
         <!-- android:theme="@style/AppTheme"> -->
         <activity android:name=".CategorySelectActivity" />
-        <activity android:name=".makePost" />
         <activity android:name=".PostingActivity" />
         <activity android:name=".PostingsActivity" />
         <activity android:name=".EditableAccountActivity" />

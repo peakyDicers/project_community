@@ -1,22 +1,18 @@
 package me.kindeep.projectcommunity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Locale;
 
 public class CategorySelectActivity extends AppCompatActivity {
 
@@ -36,7 +32,13 @@ public class CategorySelectActivity extends AppCompatActivity {
 
         spinner = findViewById(R.id.spinner);
 
-
+        final Button button = findViewById(R.id.button3);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(CategorySelectActivity.this,PostingActivity.class);
+                startActivity(i);
+            }
+        });
 //        String[] stringArray = Arrays.copyOf(API.getInstance().getCategories().toArray(), API.getInstance().getCategories().size(), String[].class);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

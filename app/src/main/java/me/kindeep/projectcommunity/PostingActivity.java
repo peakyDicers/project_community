@@ -66,6 +66,9 @@ public class PostingActivity extends AppCompatActivity {
                 );
                 p.setLocation(latitude, longitude);
                 API.getInstance().createPost(p, v);
+                Intent i = new Intent(PostingActivity.this, PostingsActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
             }
         });
     }
@@ -75,4 +78,5 @@ public class PostingActivity extends AppCompatActivity {
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
     }
+
 }
